@@ -1,77 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Get Perfect Price</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .result-price {
+      font-size: 28px;
+      color: green;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+
+    .active {
+      background: #007bff;
+      color: white;
+    }
+  </style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <!-- Header -->
-    <div class="header">
-      <h1>Get Perfect Price</h1>
-      <div class="lang-buttons">
-        <button id="enBtn" class="active">EN</button>
-        <button id="thBtn">TH</button>
-      </div>
-    </div>
-
-    <!-- Input Card -->
-    <div class="card">
-      <h2 data-i18n="inputTitle">Pricing Inputs</h2>
-
-      <div class="form-group">
-        <label data-i18n="costLabel">Product Cost (฿)</label>
-        <input type="number" id="cost" placeholder="100">
-      </div>
-
-      <div class="form-group">
-        <label data-i18n="extraLabel">Additional Cost (฿)</label>
-        <input type="number" id="extra" placeholder="20">
-      </div>
-
-      <div class="form-group">
-        <label data-i18n="feeLabel">Platform Fee (%)</label>
-        <input type="number" id="fee" placeholder="10">
-      </div>
-
-      <div class="form-group">
-        <label data-i18n="profitLabel">Target Profit (%)</label>
-        <input type="number" id="profit" placeholder="30">
-      </div>
-    </div>
-
-    <!-- Result Card -->
-    <div class="card">
-      <h2 data-i18n="resultTitle">Recommended Price</h2>
-
-      <div class="result-box">
-        <h3 data-i18n="recommended">Selling Price</h3>
-        <div class="price" id="sellingPrice">฿ 0.00</div>
-      </div>
-
-      <div class="result-row">
-        <span data-i18n="netProfit">Net Profit / Unit</span>
-        <strong id="netProfit">฿ 0.00</strong>
-      </div>
-
-      <div class="result-row">
-        <span data-i18n="minimumPrice">Minimum Safe Price</span>
-        <strong id="minPrice">฿ 0.00</strong>
-      </div>
-
-      <div class="note" data-i18n="note">
-        Calculated including platform fee and target profit.
-      </div>
-    </div>
-
+  <div class="lang-switch">
+    <button id="enBtn" class="active">EN</button>
+    <button id="thBtn">TH</button>
   </div>
 
-  <script src="script.js"></script>
+  <div class="card">
+    <h2 data-i18n="inputTitle">Pricing Inputs</h2>
 
+    <label data-i18n="costLabel">Product Cost (฿)</label>
+    <input type="number" id="cost" />
+
+    <label data-i18n="extraLabel">Additional Cost (฿)</label>
+    <input type="number" id="extra" />
+
+    <label data-i18n="feeLabel">Platform Fee (%)</label>
+    <input type="number" id="fee" />
+
+    <label data-i18n="profitLabel">Target Profit (%)</label>
+    <input type="number" id="profit" />
+  </div>
+
+  <div class="card">
+    <h2 data-i18n="resultTitle">Recommended Price</h2>
+
+    <div class="result-price" id="sellingPrice">฿ 0.00</div>
+
+    <div>
+      <span data-i18n="netProfit">Net Profit / Unit</span>:
+      <strong id="netProfit">฿ 0.00</strong>
+    </div>
+
+    <div>
+      <span data-i18n="minimumPrice">Minimum Safe Price</span>:
+      <strong id="minPrice">฿ 0.00</strong>
+    </div>
+
+    <p data-i18n="note">
+      Calculated including platform fee and target profit.
+    </p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
