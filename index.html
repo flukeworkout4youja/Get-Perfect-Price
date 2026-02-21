@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Perfect Price</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">Get Perfect Price</div>
+    <div class="lang-toggle">
+      <button id="enBtn" class="active">EN</button>
+      <button id="thBtn">TH</button>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <h2 data-i18n="inputTitle">Pricing Inputs</h2>
+
+      <label data-i18n="costLabel">Product Cost (฿)</label>
+      <input type="number" id="cost" placeholder="100" />
+
+      <label data-i18n="extraLabel">Additional Cost (฿)</label>
+      <input type="number" id="extra" placeholder="20" />
+
+      <label data-i18n="feeLabel">Platform Fee (%)</label>
+      <input type="number" id="fee" placeholder="10" />
+
+      <label data-i18n="profitLabel">Target Profit (%)</label>
+      <input type="number" id="profit" placeholder="30" />
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <h2 data-i18n="resultTitle">Recommended Price</h2>
+
+      <div class="result-card">
+        <p data-i18n="recommended">Selling Price</p>
+        <h1 id="sellingPrice">฿ 0</h1>
+      </div>
+
+      <div class="result-row">
+        <span data-i18n="netProfit">Net Profit / Unit</span>
+        <strong id="netProfit">฿ 0</strong>
+      </div>
+
+      <div class="result-row">
+        <span data-i18n="minimumPrice">Minimum Safe Price</span>
+        <strong id="minPrice">฿ 0</strong>
+      </div>
+
+      <p class="note" data-i18n="note">
+        Calculated including platform fee and target profit.
+      </p>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
