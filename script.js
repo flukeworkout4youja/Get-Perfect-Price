@@ -45,9 +45,8 @@ const translations = {
     note: "Calculated including platform fee and target profit."
   },
   th: {
-    inputTitle: "ข้อมูลการตั้งราคา",
-    resultTitle: "ราคาที่แนะนำ",
-    costLabel: "ต้นทุนสินค้า (฿)",
+    inputTitle: "ราคาขายที่ควรตั้ง (หลังหักค่าธรรมเนียมแล้ว)",
+    resultTitle: "ราคาขายที่ควรตั้ง    costLabel: "ต้นทุนสินค้า (฿)",
     extraLabel: "ค่าใช้จ่ายเพิ่มเติม (฿)",
     feeLabel: "ค่าธรรมเนียมแพลตฟอร์ม (%)",
     profitLabel: "เป้ากำไร (%)",
