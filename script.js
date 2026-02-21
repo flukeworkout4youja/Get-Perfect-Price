@@ -1,3 +1,4 @@
+// ===== Get Elements =====
 const costInput = document.getElementById("cost");
 const extraInput = document.getElementById("extra");
 const feeInput = document.getElementById("fee");
@@ -7,6 +8,7 @@ const sellingPriceEl = document.getElementById("sellingPrice");
 const netProfitEl = document.getElementById("netProfit");
 const minPriceEl = document.getElementById("minPrice");
 
+// ===== Calculate Function =====
 function calculate() {
   const cost = parseFloat(costInput.value) || 0;
   const extra = parseFloat(extraInput.value) || 0;
@@ -26,11 +28,12 @@ function calculate() {
   minPriceEl.textContent = "฿ " + minPrice.toFixed(2);
 }
 
-[costInput, extraInput, feeInput, profitInput].forEach(input =>
-  input.addEventListener("input", calculate)
-);
+// ===== Input Listeners =====
+[costInput, extraInput, feeInput, profitInput].forEach(input => {
+  input.addEventListener("input", calculate);
+});
 
-/* Language System */
+// ===== Language System =====
 const translations = {
   en: {
     inputTitle: "Pricing Inputs",
@@ -45,15 +48,16 @@ const translations = {
     note: "Calculated including platform fee and target profit."
   },
   th: {
-    inputTitle: "ราคาขายที่ควรตั้ง (หลังหักค่าธรรมเนียมแล้ว)",
-    resultTitle: "ราคาขายที่ควรตั้ง    costLabel: "ต้นทุนสินค้า (฿)",
+    inputTitle: "ตั้งราคาขายอย่างแม่นยำ",
+    resultTitle: "ราคาที่ควรตั้ง",
+    costLabel: "ต้นทุนสินค้า (฿)",
     extraLabel: "ค่าใช้จ่ายเพิ่มเติม (฿)",
     feeLabel: "ค่าธรรมเนียมแพลตฟอร์ม (%)",
     profitLabel: "เป้ากำไร (%)",
     recommended: "ราคาขายที่ควรตั้ง",
-    netProfit: "กำไรสุทธิต่อชิ้น",
-    minimumPrice: "ราคาขั้นต่ำที่ปลอดภัย",
-    note: "คำนวณรวมค่าธรรมเนียมและกำไรที่ต้องการแล้ว"
+    netProfit: "กำไรสุทธิ / ชิ้น",
+    minimumPrice: "ราคาขั้นต่ำ (ไม่ขาดทุน)",
+    note: "คำนวณรวมค่าธรรมเนียมแพลตฟอร์มและกำไรที่ตั้งไว้"
   }
 };
 
@@ -69,3 +73,7 @@ function setLanguage(lang) {
 
 document.getElementById("enBtn").onclick = () => setLanguage("en");
 document.getElementById("thBtn").onclick = () => setLanguage("th");
+
+// ===== Default Load =====
+setLanguage("en");
+calculate();
