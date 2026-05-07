@@ -1,0 +1,31 @@
+name: Build Mac App
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Packages
+        run: |
+          pip install pandas openpyxl pyinstaller
+
+      - name: Build App
+        run: |
+          pyinstaller --onefile --windowed app.py
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Mac-App
+          path: dist/
