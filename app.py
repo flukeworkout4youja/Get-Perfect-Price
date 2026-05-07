@@ -6,7 +6,7 @@ import re
 import sys
 
 # =========================================================
-# BASE PATH (รองรับ .exe / .app / python)
+# BASE PATH (รองรับ python / .exe / .app)
 # =========================================================
 
 BASE_DIR = os.path.dirname(sys.executable) if getattr(sys, 'frozen', False) else os.path.dirname(os.path.abspath(__file__))
@@ -16,6 +16,8 @@ OUT_FOLDER = os.path.join(BASE_DIR, "out")
 TEMPLATE_FILE = os.path.join(BASE_DIR, "template.xlsx")
 
 # =========================================================
+# FIND INPUT FILE
+# =========================================================
 
 def find_input_file():
 
@@ -23,7 +25,12 @@ def find_input_file():
         os.makedirs(IN_FOLDER)
 
     files = [f for f in os.listdir(IN_FOLDER) if f.endswith(".xlsx")]
-    files = [f for f in files if "template" not in f.lower() and "~$" not in f]
+
+    files = [
+        f for f in files
+        if "template" not in f.lower()
+        and "~$" not in f
+    ]
 
     if not files:
         print("❌ ไม่มีไฟล์ใน in/")
@@ -36,6 +43,8 @@ def find_input_file():
 
     return os.path.join(IN_FOLDER, files[0])
 
+# =========================================================
+# SPLIT BILL
 # =========================================================
 
 def split_bill(text):
@@ -52,6 +61,8 @@ def split_bill(text):
 
     return text, 0
 
+# =========================================================
+# MAIN PROCESS
 # =========================================================
 
 def process():
@@ -77,6 +88,7 @@ def process():
 
     try:
         df = pd.read_excel(input_file, dtype=str)
+
     except Exception as e:
         print(f"❌ เปิดไฟล์ไม่ได้: {e}")
         return
@@ -90,7 +102,9 @@ def process():
     def find_col(names):
 
         for n in names:
+
             for c in df.columns:
+
                 if c.strip().lower() == n.strip().lower():
                     return c
 
@@ -106,7 +120,7 @@ def process():
     }
 
     # =====================================================
-    # CHECK REQUIRED COLUMN
+    # CHECK REQUIRED
     # =====================================================
 
     for key in ['date', 'bill', 'product_code', 'qty', 'price']:
@@ -127,7 +141,12 @@ def process():
     # =====================================================
 
     df[col['bill']] = df[col['bill']].astype(str).str.strip()
-    df[col['product_code']] = df[col['product_code']].astype(str).str.strip()
+
+    df[col['product_code']] = (
+        df[col['product_code']]
+        .astype(str)
+        .str.strip()
+    )
 
     # =====================================================
     # FILTER PRODUCT
@@ -153,7 +172,11 @@ def process():
         dayfirst=True
     )
 
-    df['DATE_STR'] = df['DATE'].dt.strftime('%Y%m%d').fillna('19000101')
+    df['DATE_STR'] = (
+        df['DATE']
+        .dt.strftime('%Y%m%d')
+        .fillna('19000101')
+    )
 
     df['QTY'] = pd.to_numeric(
         df[col['qty']],
@@ -173,6 +196,7 @@ def process():
         ).fillna(0)
 
     else:
+
         df['DISC'] = 0
 
     # =====================================================
@@ -218,6 +242,7 @@ def process():
 
     try:
         wb = load_workbook(TEMPLATE_FILE)
+
     except Exception as e:
         print(f"❌ เปิด template ไม่ได้: {e}")
         return
@@ -281,6 +306,7 @@ def process():
                 value=2
             )
 
+            # COLUMN R
             ws.cell(
                 row=excel_row,
                 column=18,
@@ -336,8 +362,11 @@ def process():
     )
 
     try:
+
         wb.save(out_file)
+
     except PermissionError:
+
         print("❌ บันทึกไม่ได้ กรุณาปิดไฟล์ Excel ก่อน")
         return
 
