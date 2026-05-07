@@ -1,32 +1,31 @@
-name: Build Mac .app
+name: Build Mac App
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
-      - name: Install PyInstaller
-        run: pip install pyinstaller
-
-      - name: Build .app
+      - name: Install Packages
         run: |
-          pyinstaller --windowed --name MyApp main.py
+          pip install pandas openpyxl pyinstaller
 
-      - name: Upload build
+      - name: Build App
+        run: |
+          pyinstaller --onefile --windowed app.py
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: MyApp-mac
+          name: Mac-App
           path: dist/
