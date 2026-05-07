@@ -1,0 +1,32 @@
+name: Build Mac .app
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build .app
+        run: |
+          pyinstaller --windowed --name MyApp main.py
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyApp-mac
+          path: dist/
