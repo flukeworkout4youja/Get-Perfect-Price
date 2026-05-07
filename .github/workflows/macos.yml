@@ -1,0 +1,27 @@
+name: macOS Build
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show macOS version
+        run: sw_vers
+
+      - name: Install dependencies (example)
+        run: |
+          brew update
+          brew install git
+
+      - name: Run script
+        run: |
+          echo "Hello from macOS runner"
+          uname -a
